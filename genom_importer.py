@@ -26,6 +26,10 @@ def run_ops_without_view_layer_update(func):
 
 
 path = "//genom.txt"  # file path to genomdata 
+aSize = 1
+tSize = 1.5
+cSize = 2
+gSize = 2.5
 
 f = Path(bpy.path.abspath(path))
 
@@ -61,7 +65,6 @@ def add_cubes():
         readError = False
 
         if base == 'A':
-
             bpy.ops.mesh.primitive_cube_add(size=1, enter_editmode=False, align='WORLD',
                                             location=(posisionX, posisionY, 0),
                                             scale=(1, 1, 1))
@@ -82,12 +85,10 @@ def add_cubes():
                                             scale=(1, 1, 2.5))
 
         else:
-            
             readError = True
 
 
         if readError == False:
-            
             posisionX += 1
             basesRead += 1
 
