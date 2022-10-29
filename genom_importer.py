@@ -24,17 +24,19 @@ def run_ops_without_view_layer_update(func):
 
 
 
+# File path to genomdata
+path = "//genom.txt"  
 
-path = "//genom.txt"  # file path to genomdata 
-aSize = 1
-tSize = 1.5
-cSize = 2
-gSize = 2.5
+
+# The z height of the rectangle
+aZSize = 1
+tZSize = 1.5
+cZSize = 2
+gZSize = 2.5
+
 
 f = Path(bpy.path.abspath(path))
-
 dataString = ""
-
 if f.exists():
     dataString = f.read_text()
 else:
@@ -45,10 +47,11 @@ dataList = []
 dataSize = len(dataList)
 
 
-rootDataSize = math.sqrt(dataSize)
-sqerSide = int(rootDataSize)
-if rootDataSize > int(rootDataSize):
-    sqerSide = int(rootDataSize) + 1
+# Calculates the side of the square
+sqrtDataSiz = math.sqrt(dataSize)
+sqerSide = int(sqrtDataSize)
+if sqrtDataSiz > int(sqrtDataSiz):
+    sqerSide = int(sqrtDataSiz) + 1
 
 
 def add_cubes():
@@ -66,23 +69,19 @@ def add_cubes():
 
         if base == 'A':
             bpy.ops.mesh.primitive_cube_add(size=1, enter_editmode=False, align='WORLD',
-                                            location=(posisionX, posisionY, 0),
-                                            scale=(1, 1, 1))
+            location=(posisionX, posisionY, 0), scale=(1, 1, aZSize))
 
         elif base == 'T':
             bpy.ops.mesh.primitive_cube_add(size=1, enter_editmode=False, align='WORLD',
-                                            location=(posisionX, posisionY, 0.25),
-                                            scale=(1, 1, 1.5))
+            location=(posisionX, posisionY, 0.25), scale=(1, 1, tZSize))
 
         elif base == 'G':
             bpy.ops.mesh.primitive_cube_add(size=1, enter_editmode=False, align='WORLD',
-                                            location=(posisionX, posisionY, 0.5),
-                                            scale=(1, 1, 2))
+            location=(posisionX, posisionY, 0.5), scale=(1, 1, cZSize))
 
         elif base == 'C':
             bpy.ops.mesh.primitive_cube_add(size=1, enter_editmode=False, align='WORLD',
-                                            location=(posisionX, posisionY, 0.75),
-                                            scale=(1, 1, 2.5))
+            location=(posisionX, posisionY, 0.75), scale=(1, 1, gZSize))
 
         else:
             readError = True
@@ -93,7 +92,6 @@ def add_cubes():
             basesRead += 1
 
         if posisionX == sqerSide:
-
             posisionX = 0
             posisionY -= 1
             bpy.ops.object.select_all(action='SELECT')
